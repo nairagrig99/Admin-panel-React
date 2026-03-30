@@ -1,0 +1,41 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John",
+      "isLogged": false
+    },
+    {
+      "id": "2",
+      "name": "Anna",
+      "isLogged": false
+    },
+    {
+      "id": "30e4",
+      "first_name": "Naira",
+      "last_name": "Grigoryan",
+      "gender": "Female",
+      "mobileOrEmail": "nairagrig99@gmail.com",
+      "password": "dddddddddd",
+      "birthOfDay": "1941-08-06T21:00:00.000Z"
+    },
+    {
+      "id": "0809",
+      "first_name": "Naira",
+      "last_name": "Grigoryan",
+      "gender": "Female",
+      "mobileOrEmail": "nairagrig99@gmail.com",
+      "password": "qqqqqqqqqq",
+      "birthOfDay": "1899-11-29T21:02:00.000Z"
+    },
+    {
+      "id": "e971",
+      "first_name": "Naira",
+      "last_name": "Grigoryan",
+      "gender": "Female",
+      "mobileOrEmail": "nairagrig99@gmail.com",
+      "password": "qqqqqqqqqq",
+      "birthOfDay": "1899-11-29T21:02:00.000Z"
+    }
+  ]
+}
