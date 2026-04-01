@@ -6,11 +6,11 @@ import type {OptionProps} from "../../Model/SelectProps.ts";
 import {Controller, useForm} from "react-hook-form";
 import Button from "../UI/Button.tsx";
 import {ErrorMessage} from "../UI/ErrorMessage.tsx";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import type {UserFormState, UserInterface} from "../../Model/user-interface.ts";
 import {registerUser} from "../../Store/userActions.ts";
-import type {AppDispatch} from "../../Store/store.ts";
-import {Link, NavLink} from 'react-router-dom';
+import type {AppDispatch, RootState} from "../../Store/store.ts";
+import {Link, useNavigate} from 'react-router-dom';
 
 const MONTH_OPTIONS: OptionProps[] = Array.from({length: 12}, (_, i) => (
     {value: new Date(0, i).toLocaleString('en-US', {month: 'long'})}
@@ -25,8 +25,10 @@ const GENDER = [{value: "Female"}, {value: "Male"}];
 export default function RegisterForm() {
 
     const dispatch = useDispatch<AppDispatch>();
+    const select = useSelector((state: RootState) => state.user);
+    const navigate = useNavigate()
 
-    const {register, watch, control, handleSubmit, formState: {errors}} = useForm({
+    const {watch, control, handleSubmit, setError, formState: {errors}} = useForm({
         defaultValues: {
             first_name: "",
             last_name: "",
@@ -40,6 +42,27 @@ export default function RegisterForm() {
     });
 
     const onSubmit = (data: UserFormState) => {
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^(\+?\d{1,4}?[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/;
+
+        if (!(emailRegex.test(data.mobileOrEmail) || phoneRegex.test(data.mobileOrEmail))) {
+            setError('mobileOrEmail', {
+                type: "manual",
+                message: "Mobile number or email is not Valid"
+            })
+            return;
+        }
+
+        const isExist = select.user.some((user) => user.mobileOrEmail === data.mobileOrEmail)
+
+        if (isExist) {
+            setError('mobileOrEmail', {
+                type: "manual",
+                message: "This Email or Mobile number is already exist"
+            })
+            return
+        }
+
         const month = MONTH_OPTIONS.findIndex((month) => month.value === data.birthMonth)
         const birthOfDay = new Date(+data.birthYear, month, +data.birthDay);
 
@@ -53,10 +76,15 @@ export default function RegisterForm() {
             gender: data.gender,
             mobileOrEmail: data.mobileOrEmail,
             password: data.password,
-            birthOfDay: birthOfDay
+            birthOfDay: birthOfDay,
+            isLogged: false
         }
 
-        dispatch(registerUser(updatedData))
+        dispatch(registerUser(updatedData)).then((res) => {
+            if (res.meta.requestStatus === "fulfilled") {
+                navigate('/auth/login')
+            }
+        })
     }
 
     const [birthDay, birthYear, birthMonth] = watch(['birthDay', 'birthYear', 'birthMonth']);
@@ -67,12 +95,12 @@ export default function RegisterForm() {
         return Array.from({length: currentLength}, (_, i) => ({value: (i + 1)}));
     }, [birthDay, birthYear, birthMonth])
 
-    return <div className="flex flex-col bg-[#373333] items-center h-screen justify-center ">
+    return <div className="flex flex-col bg-[#373333] items-center h-auto overflow-auto md:h-screen justify-center ">
         <div className="w-full flex justify-center  items-center  text-[#FFF] font-sans">
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-[20px]">
+            <form onSubmit={handleSubmit(onSubmit)} className="px-4 md:px-0  flex flex-col gap-[20px] ">
                 <div>
                     <h3 className="text-[20px] font-sans m-[0] my-[5px]">Name</h3>
-                    <div className="flex gap-[8px]">
+                    <div className="flex flex-col gap-[4px] md:flex-row ">
                         <Controller
                             name="first_name"
                             control={control}
@@ -83,7 +111,7 @@ export default function RegisterForm() {
                             render={({field, fieldState: {error}}) => (
                                 <div className="flex flex-col">
                                     <Input type="text" {...field} name="first_name" placeholder="First name"
-                                           className="px-[10px] py-[17px] rounded-[4px] border-0 outline-none"
+                                           className="px-[10px] py-[17px] rounded-[4px] border-1 border-solid outline-none"
                                     />
                                     {error && <ErrorMessage message={error?.message}/>}
                                 </div>
@@ -100,7 +128,7 @@ export default function RegisterForm() {
                             render={({field, fieldState: {error}}) => (
                                 <div className="flex flex-col">
                                     <Input {...field} type="text" name="last_name" placeholder="Last name"
-                                           className="px-[10px] py-[17px] rounded-[4px] border-0 outline-none"/>
+                                           className="px-[10px] py-[17px] border-1 border-solid rounded-[4px]  outline-none"/>
                                     {error && <ErrorMessage message={error?.message}/>}
                                 </div>
 
@@ -111,7 +139,7 @@ export default function RegisterForm() {
                 <div>
                     <h3 className="text-[20px] font-sans m-[0] my-[5px]">Birthday</h3>
                     <div className="flex flex-col">
-                        <div className="flex gap-[8px]">
+                        <div className="flex flex-col md:flex-row  gap-[8px]">
                             <Controller
                                 name="birthYear"
                                 control={control}
@@ -121,7 +149,7 @@ export default function RegisterForm() {
                                 render={({field}) => (
                                     <Select {...field} options={YEAR_OPTION}
                                             placeholder="Year"
-                                            className="px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
+                                            className="border-1 border-solid px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
                                 )}
                             />
 
@@ -134,7 +162,7 @@ export default function RegisterForm() {
                                 render={({field}) => (
                                     <Select {...field} options={MONTH_OPTIONS}
                                             placeholder="Month"
-                                            className="px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
+                                            className="border-1 border-solid px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
                                 )}
                             />
 
@@ -147,7 +175,7 @@ export default function RegisterForm() {
                                 render={({field}) => (
                                     <Select {...field} options={DAY_OPTIONS}
                                             placeholder="Day"
-                                            className="px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
+                                            className="border-1 border-solid px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
                                 )}
                             />
                         </div>
@@ -178,7 +206,7 @@ export default function RegisterForm() {
                         render={({field, fieldState: {error}}) => (
                             <>
                                 <Select {...field} options={GENDER} placeholder="Gender"
-                                        className="px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
+                                        className="border-1 border-solid px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
                                 {error && <ErrorMessage message={error?.message}/>}
                             </>
 
@@ -197,9 +225,9 @@ export default function RegisterForm() {
                         render={({field, fieldState: {error}}) => (
                             <>
                                 <Label label="Mobile or Email" labelClass="flex flex-col text-[20px] font-sans">
-                                    <Input type="text" {...field} name="first_name"
+                                    <Input type="text" {...field} name="email"
                                            placeholder="Mobile number Or email"
-                                           className="px-[10px] py-[17px] rounded-[4px] border-0 outline-none"/>
+                                           className="border-1 border-solid px-[10px] py-[17px] rounded-[4px] border-0 outline-none"/>
                                 </Label>
                                 {error && <ErrorMessage message={error?.message}/>}
                             </>
@@ -221,7 +249,7 @@ export default function RegisterForm() {
                                 <Label label="Password" labelClass="flex flex-col text-[20px] font-sans">
                                     <Input type="password" {...field} name="password"
                                            placeholder="password"
-                                           className="px-[10px] py-[17px] rounded-[4px] border-0 outline-none"/>
+                                           className="border-1 border-solid px-[10px] py-[17px] rounded-[4px] border-0 outline-none"/>
                                 </Label>
                                 {error && <ErrorMessage message={error?.message}/>}
                             </>
@@ -231,11 +259,14 @@ export default function RegisterForm() {
                 </div>
                 <Button
                     className="py-[10px] px-0 rounded-[4px] bg-[#2BB3A3] text-[#FFF] outline-none cursor-pointer text-[18px]"
+                    type='submit'
                     value="Submit"/>
             </form>
         </div>
-        <div className="text-center text-[#FFF]">Are you already Registered ? <Link className="text-[18px]"
-                                                                                    to="/auth/login">Login</Link></div>
+
+        <div className="text-center text-[#FFF]">Are you already Registered ? <Link
+            className="text-[18px] text-blue-700"
+            to="/auth/login">Login</Link></div>
     </div>
 
 }

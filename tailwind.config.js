@@ -1,16 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
     content: [
         "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
+        "./src/**/*.{js,ts,jsx,tsx}", // Make sure this covers your folder structure!
     ],
     theme: {
-        extend: {
-            // You can add your WealthWatch brand colors here later!
-            fontFamily: {
-                sans: ['ui-sans-serif', 'system-ui'],
-            },
-        },
+        extend: {},
     },
     plugins: [],
 }

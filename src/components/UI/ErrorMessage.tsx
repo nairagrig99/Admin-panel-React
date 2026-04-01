@@ -6,7 +6,6 @@ export class ErrorMessage extends Component<ErrorMessageInterface> {
         super(props);
     }
 
-
     render() {
         const {message} = this.props;
         return <span className="text-[#e72d2d] mt-[2px] text-sm">{message}</span>

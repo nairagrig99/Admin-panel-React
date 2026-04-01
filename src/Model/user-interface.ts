@@ -1,11 +1,14 @@
 export interface UserInterface {
+    id: string,
     first_name: string,
     last_name: string,
-    birthOfDay: Date,
+    birthOfDay: Date | null,
     gender: string,
     mobileOrEmail: string,
-    password: string
+    password: string,
+    isLogged: boolean
 }
+
 export interface UserFormState {
     first_name: string,
     last_name: string,

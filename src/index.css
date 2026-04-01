@@ -1,3 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*@tailwind base;*/
+/*@tailwind components;*/
+/*@tailwind utilities;*/
+@import "tailwindcss";
+
+/* If you need custom breakpoints like 720px, you do it here now: */
+@theme {
+    --breakpoint-tablet: 720px;
+}
+body {
+    margin: 0;
+    padding: 0;
+}

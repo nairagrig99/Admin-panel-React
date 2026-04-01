@@ -1,8 +1,9 @@
 export type ButtonType = {
     value: string;
-    className?:string,
+    type: "submit" | "reset" | "button" | undefined;
+    className?: string,
 }
 
-export default function Button({value,className}: ButtonType) {
-    return <button className={className}>{value}</button>
+export default function Button({value, type, className}: ButtonType) {
+    return <button type={type} className={className}>{value}</button>
 }
