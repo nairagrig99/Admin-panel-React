@@ -1,6 +1,7 @@
-import {redirect} from "react-router-dom";
 import {URL} from "../constants/constant.ts";
-export async function authLoader() {
+import {redirect} from "react-router-dom";
+
+export async function mainLoader() {
     const response = await fetch(URL);
 
     if (!response.ok) throw new Error("Something went wrong");
@@ -9,7 +10,7 @@ export async function authLoader() {
 
     const isLoggedUser = user.length > 0 && user.some((us) => us.isLogged);
 
-    if (isLoggedUser) return redirect('/dashboard')
+    if (!isLoggedUser) return redirect('/auth/login')
 
     return true;
 }

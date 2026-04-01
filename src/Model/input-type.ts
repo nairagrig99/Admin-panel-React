@@ -5,5 +5,5 @@ export type InputType = {
     id?: string,
     type: string,
     className?: string,
-    onChange?: (e: string) => void
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }

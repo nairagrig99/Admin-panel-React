@@ -8,9 +8,9 @@ export default function Select({value, onChange, options, name, onBlur, placehol
         className={className}
         onChange={(e) => onChange(e.target.value)}
     >
-        <option value="" disabled className="text-[#000]"> {placeholder} </option>
+        <option value="" disabled className="text-black"> {placeholder} </option>
         {options.map((val) =>
-            <option key={val.value} value={val.value}>{val.value}</option>
+            <option className="text-black" key={val.value} value={val.value}>{val.value}</option>
         )}
     </select>
 }
