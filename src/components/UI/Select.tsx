@@ -3,7 +3,7 @@ import {memo} from "react";
 import {ErrorMessage} from "./ErrorMessage.tsx";
 
 const Select = memo(({errorMessage, options, onChange, placeholder, ...props}: SelectProps) => {
-    return <div className="flex flex-col">
+    return <div className="flex flex-col w-full">
         <select
             {...props}
             onChange={(e) => onChange(e)}
