@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Input from "../UI/Input.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../Store/store.ts";
 import {Link, useNavigate} from "react-router-dom";
 import Button from "../UI/Button.tsx";
-import {updateUser} from "../../Store/userActions.ts";
+import {updateUser} from "../../Store/User/ApiThunk.ts";
 import type {UserInterface} from "../../Model/user-interface.ts";
 import {ErrorMessage} from "../UI/ErrorMessage.tsx";
 

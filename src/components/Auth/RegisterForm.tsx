@@ -2,13 +2,13 @@ import Input from "../UI/Input.tsx";
 import Label from "../UI/Label.tsx";
 import {useMemo} from "react";
 import Select from "../UI/Select.tsx";
-import type {OptionProps} from "../../Model/SelectProps.ts";
+import type {OptionProps} from "../../Model/select-props.ts";
 import {Controller, useForm} from "react-hook-form";
 import Button from "../UI/Button.tsx";
 import {ErrorMessage} from "../UI/ErrorMessage.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {UserFormState, UserInterface} from "../../Model/user-interface.ts";
-import {registerUser} from "../../Store/userActions.ts";
+import {registerUser} from "../../Store/User/ApiThunk.ts";
 import type {AppDispatch, RootState} from "../../Store/store.ts";
 import {Link, useNavigate} from 'react-router-dom';
 
@@ -21,6 +21,7 @@ const startYear = new Date(1930, 0, 1).getFullYear();
 const yearLength = currentYear - startYear;
 
 const YEAR_OPTION: OptionProps[] = Array.from({length: yearLength}, (_, i) => ({value: (startYear + i)}));
+
 const GENDER = [{value: "Female"}, {value: "Male"}];
 export default function RegisterForm() {
 
@@ -205,7 +206,7 @@ export default function RegisterForm() {
                         }}
                         render={({field, fieldState: {error}}) => (
                             <>
-                                <Select {...field} options={GENDER} placeholder="Gender"
+                                <Select {...field}  options={GENDER} placeholder="Gender"
                                         className="border-1 border-solid px-[10px] py-[17px] rounded-[4px] border-0 outline-none w-full"/>
                                 {error && <ErrorMessage message={error?.message}/>}
                             </>

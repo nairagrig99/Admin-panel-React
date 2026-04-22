@@ -1,15 +1,25 @@
-import {redirect} from "react-router-dom";
 import {URL} from "../constants/constant.ts";
-export async function authLoader() {
+import type {UserInterface} from "../Model/user-interface.ts";
+import {redirect} from "react-router-dom";
+
+async function getIsLogged() {
     const response = await fetch(URL);
-
-    if (!response.ok) throw new Error("Something went wrong");
-
     const user = await response.json();
+    return user.some((u: UserInterface) => u.isLogged);
+}
 
-    const isLoggedUser = user.length > 0 && user.some((us) => us.isLogged);
+export async function protectedLoader() {
+    const isLogged = await getIsLogged();
+    if (!isLogged) {
+        return redirect("/auth/login");
+    }
+    return null
+}
 
-    if (isLoggedUser) return redirect('/dashboard')
-
-    return true;
+export async function loginLoader() {
+    const isLogged = await getIsLogged();
+    if (isLogged) {
+        return redirect("/dashboard")
+    }
+    return null;
 }

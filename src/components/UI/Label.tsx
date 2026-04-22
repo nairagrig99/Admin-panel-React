@@ -2,7 +2,7 @@ import type {PropsType} from "../../Model/props-type.ts";
 
 export type LabelProps = {
     label: string,
-    labelClass: string
+    labelClass?: string
 }
 
 type combine = LabelProps & PropsType

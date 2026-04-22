@@ -1,9 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit";
-import userSlice from "./userSlice.ts";
+import userSlice from "./User/userSlice.ts";
+import popupSlice from "./popupSlice.ts";
+import transactionSlice from "./Transaction/trsansactionSlice.ts"
 
 export const coreStore = configureStore({
     reducer: {
-        user: userSlice
+        user: userSlice,
+        popup: popupSlice,
+        transaction: transactionSlice
     }
 })
 

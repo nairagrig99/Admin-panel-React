@@ -1,5 +1,7 @@
 export type InputType = {
-    value?: string,
+    value?: string | number,
+    onBlur?: (e:React.ChangeEvent<HTMLInputElement>) => void,
+    errorMessage?: string,
     placeholder?: string,
     name?: string,
     id?: string,

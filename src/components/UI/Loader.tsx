@@ -6,9 +6,9 @@ import type {RootState} from "../../Store/store.ts";
 
 export class Loader extends Component<any> {
     render() {
+
         const {loader} = this.props;
         if (!loader) return null;
-
         return createPortal(
             <div className="fixed inset-0 flex items-center justify-center bg-white/50 z-50">
                 <RotatingLines width="96"/>
@@ -19,7 +19,7 @@ export class Loader extends Component<any> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    loader: state.user.isLoading
+    loader:  state.user.isLoading
 });
 
 

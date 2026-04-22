@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getUser, registerUser, updateUser} from "./userActions.ts";
-import type {UserInterface} from "../Model/user-interface.ts";
+import {getUser, registerUser, updateUser} from "./ApiThunk.ts";
+import type {UserInterface} from "../../Model/user-interface.ts";
 
 const UserState: UserInterface[] = [{
     id: "",
@@ -25,7 +25,9 @@ const userSlice = createSlice({
     initialState: INITIAL_STATE,
     reducers: {
         logOut: (state) => {
-            state.user = UserState;
+            state.loggedUser = null;
+            state.user = null;
+            state.isLoading = false
         }
     },
     extraReducers: (builder) => {
@@ -48,8 +50,8 @@ const userSlice = createSlice({
             })
             .addCase(getUser.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.user = action.payload
-                state.loggedUser = state.user.find((user) => user.isLogged)
+                state.user = action.payload;
+                state.loggedUser = state.user.find((user) => user.isLogged);
             })
             .addCase(getUser.rejected, (state, action) => {
                 state.isLoading = false;
@@ -64,7 +66,11 @@ const userSlice = createSlice({
                 const index = state.user.findIndex((user) => user.id === id);
                 state.user[index][key] = value;
                 state.loggedUser = state.user[index]
-            })
+                state.isLoading = false;
+            }).addCase(updateUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload
+        })
 
     }
 })
