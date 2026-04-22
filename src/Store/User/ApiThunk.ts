@@ -1,8 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {URL} from "../constants/constant.ts";
-import type {UserInterface} from "../Model/user-interface.ts";
-import type {UpdateFieldInterface} from "../Model/update-field-interface.ts";
+import {URL} from "../../constants/constant.ts";
+import type {UserInterface} from "../../Model/user-interface.ts";
+import type {UpdateFieldInterface} from "../../Model/update-field-interface.ts";
 
+type AllowedUpdateValues = string | number | boolean | object | null;
 export const registerUser = createAsyncThunk(
     'user/register',
     async (userDate: UserInterface, {rejectWithValue}) => {
@@ -26,7 +27,6 @@ export const registerUser = createAsyncThunk(
         }
     }
 )
-type AllowedUpdateValues = string | number | boolean | object | null;
 export const updateUser = createAsyncThunk(
     'update/user',
     async (update: UpdateFieldInterface<AllowedUpdateValues>) => {
@@ -58,7 +58,7 @@ export const getUser = createAsyncThunk(
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
-        console.log("response.json()",await response.json())
         return await response.json()
     }
 )
+

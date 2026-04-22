@@ -8,7 +8,7 @@
       "mobileOrEmail": "nairagrig99@gmail.com",
       "password": "ssssssssssss",
       "birthOfDay": "1933-03-02T21:00:00.000Z",
-      "isLogged": true
+      "isLogged": false
     },
     {
       "id": "1271",
@@ -119,6 +119,158 @@
       "password": "rrrrrrrrrr",
       "birthOfDay": "1937-06-09T21:00:00.000Z",
       "isLogged": false
+    },
+    {
+      "id": "3bda",
+      "first_name": "Hayk",
+      "last_name": "Minasyan",
+      "gender": "Male",
+      "mobileOrEmail": "hayk@gmailc.om",
+      "password": "qqqqqqqqqqqqqq",
+      "birthOfDay": "1939-06-07T21:00:00.000Z",
+      "isLogged": true
+    }
+  ],
+  "transactions": [
+    {
+      "userId": "3bda",
+      "description": "dddddf",
+      "amount": "8",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-04-05",
+      "status": "Pending",
+      "id": 1
+    },
+    {
+      "userId": "3bda",
+      "description": "new transaction",
+      "amount": "7",
+      "amountStatus": "Expense",
+      "category": "Transportation",
+      "date": "2026-04-24",
+      "status": "Pending",
+      "id": 2
+    },
+    {
+      "userId": "3bda",
+      "description": "new transaction",
+      "amount": "3",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-04-08",
+      "status": "Pending",
+      "id": 3
+    },
+    {
+      "userId": "3bda",
+      "description": "new transaction 2",
+      "amount": "5",
+      "amountStatus": "Expense",
+      "category": "Entertainment",
+      "date": "2026-04-16",
+      "status": "Pending",
+      "id": 4
+    },
+    {
+      "userId": "3bda",
+      "description": "new transaction",
+      "amount": "9",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-04-14",
+      "status": "Pending",
+      "id": 5
+    },
+    {
+      "userId": "3bda",
+      "description": "new transaction",
+      "amount": "8",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-04-15",
+      "status": "Pending",
+      "id": 6
+    },
+    {
+      "userId": "3bda",
+      "description": "dddddf",
+      "amount": "4",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-04-21",
+      "status": "Pending",
+      "id": 7
+    },
+    {
+      "userId": "3bda",
+      "description": "dddddf",
+      "amount": "5",
+      "amountStatus": "Expense",
+      "category": "Transportation",
+      "date": "2026-04-15",
+      "status": "Pending",
+      "id": 8
+    },
+    {
+      "userId": "3bda",
+      "description": "dddddf",
+      "amount": "4",
+      "amountStatus": "Expense",
+      "category": "Entertainment",
+      "date": "2026-04-09",
+      "status": "Pending",
+      "id": 9
+    },
+    {
+      "userId": "3bda",
+      "description": "dddddf",
+      "amount": "7",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-04-13",
+      "status": "Pending",
+      "id": 10
+    },
+    {
+      "userId": "3bda",
+      "description": "dddddf",
+      "amount": "4",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-05-05",
+      "status": "Pending",
+      "id": 11
+    },
+    {
+      "userId": "3bda",
+      "description": "44444",
+      "amount": "5",
+      "amountStatus": "Expense",
+      "category": "Shopping",
+      "date": "2026-04-14",
+      "status": "Pending",
+      "id": 12
+    },
+    {
+      "userId": "3bda",
+      "description": "Add New Transaction",
+      "amount": "23",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-04-16",
+      "status": "Pending",
+      "id": 13
+    },
+    {
+      "userId": "04fe",
+      "description": "this is Naira Transaction",
+      "amount": "5",
+      "amountStatus": "income",
+      "category": "Transportation",
+      "date": "2026-04-08",
+      "status": "Pending",
+      "id": 14
     }
   ]
 }

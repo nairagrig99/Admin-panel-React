@@ -1,7 +1,7 @@
-/*@tailwind base;*/
-/*@tailwind components;*/
-/*@tailwind utilities;*/
 @import "tailwindcss";
+:root {
+    --color-primary-teal: 45, 122, 120; /* Use RGB numbers for better opacity support */
+}
 
 /* If you need custom breakpoints like 720px, you do it here now: */
 @theme {
