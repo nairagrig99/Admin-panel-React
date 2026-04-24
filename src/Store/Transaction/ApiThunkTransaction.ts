@@ -1,6 +1,8 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import type {TransactionInterface} from "../../Model/transaction-interface.ts";
-import {URL_TRANSACTIONS} from "../../constants/constant.ts";
+import {ERROR_MSG, URL_TRANSACTIONS} from "../../constants/constant.ts";
+import {ErrorHelper} from "../../utils/errorHelper.ts";
+import type {EditTransaction} from "../../Model/edit-transaction-type.ts";
 
 export const TransactionThunk = createAsyncThunk(
     'add/transaction',
@@ -15,7 +17,7 @@ export const TransactionThunk = createAsyncThunk(
             })
 
             if (!response.ok) {
-                throw new Error("Something went wrong")
+                ErrorHelper(ERROR_MSG)
             }
 
             await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -35,17 +37,69 @@ export type TransactionParams = {
 export const getTransaction = createAsyncThunk(
     'get/Transactions',
     async ({start, end, id}: TransactionParams) => {
+        try {
+            const response = await fetch(`${URL_TRANSACTIONS}?userId=${id}&_page=${start}&_limit=${end}`, {
+                method: 'GET'
+            })
 
-        const response = await fetch(`${URL_TRANSACTIONS}?userId=${id}&_page=${start}&_limit=${end}`, {
-            method: 'GET'
-        })
+            if (!response.ok) {
+                ErrorHelper(ERROR_MSG)
+            }
 
-        if (!response.ok) {
-            throw new Error("Something went wrong")
+            const data = await response.json();
+
+            const totalCount = response.headers.get("x-total-count");
+            return {data: data, totalCount: Number(totalCount)};
+        } catch (err) {
+            console.error(err)
         }
 
-        const data = await response.json();
-        const totalCount = response.headers.get("x-total-count");
-        return {data: data, totalCount: Number(totalCount)};
+    }
+)
+
+export const removeTransaction = createAsyncThunk(
+    'remove/Transaction',
+    async (id: number) => {
+        try {
+            const response = await fetch(`${URL_TRANSACTIONS}/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (!response.ok) {
+                ErrorHelper(ERROR_MSG)
+            }
+
+            return {id: id};
+
+        } catch (err) {
+            console.error(err)
+        }
+
+    }
+)
+
+
+export const editTransaction = createAsyncThunk(
+    'update/Transaction',
+    async (data: EditTransaction) => {
+        try {
+
+            const response = await fetch(`${URL_TRANSACTIONS}/${data.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data.data)
+            });
+
+            if (!response.ok) {
+                ErrorHelper(ERROR_MSG)
+            }
+
+            return  await response.json();
+        } catch (err) {
+            console.error(err)
+        }
+
     }
 )

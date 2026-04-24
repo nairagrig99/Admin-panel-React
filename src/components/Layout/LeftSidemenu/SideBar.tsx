@@ -14,7 +14,7 @@ export default function SideBar() {
     }, [width]);
 
     return <div
-        className={`absolute sm:relative bg-[#212121] h-screen transition-all duration-300 flex flex-col
+        className={`fixed flex-shrink-0 sm:relative bg-[#212121] h-screen transition-all duration-300 flex flex-col
         ${isOpen ? 'w-10' : 'w-full  z-20 sm:w-64 sm:z-0'}`}>
         <MobileMenuTicket isOpen={isOpen} setIsOpen={setIsOpen}/>
         <div className={`flex flex-col justify-between h-full p-5 ${isOpen ? 'hidden' : 'visible'}`}>

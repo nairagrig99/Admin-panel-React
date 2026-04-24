@@ -1,23 +1,25 @@
 import Input from "../../UI/Input.tsx";
 import Label from "../../UI/Label.tsx";
 import Select from "../../UI/Select.tsx";
-import {CATEGORIES_OPTION, STATUS_EXPENSE, STATUS_OPTION} from "../../../constants/constant.ts";
+import {CATEGORIES_OPTION, LIMIT, STATUS_EXPENSE, STATUS_OPTION} from "../../../constants/constant.ts";
 import type {OptionProps} from "../../../Model/select-props.ts";
 import SelectRadioBtn from "../../UI/SelectRadioBtn.tsx";
 import {formatData} from "../../../utils/formatData.ts";
 
 import Button from "../../UI/Button.tsx";
-import {useCallback, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import type {TransactionInterface} from "../../../Model/transaction-interface.ts";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../../Store/store.ts";
-import {TransactionThunk} from "../../../Store/Transaction/ApiThunkTransaction.ts";
+import {editTransaction, getTransaction, TransactionThunk} from "../../../Store/Transaction/ApiThunkTransaction.ts";
 import {useValidation} from "../../../Hooks/useValidation.ts";
 import {ErrorMessageEnum} from "../../../Enums/error-message.enum.ts";
+import {PopupMode} from "../../../Enums/popup-mode.ts";
 
 
 const INITIAL_STATE_FORM: TransactionInterface = {
     description: '',
+    id: 0,
     amount: '',
     amountStatus: 'Expense',
     category: '',
@@ -28,13 +30,21 @@ const INITIAL_STATE_FORM: TransactionInterface = {
 const ERROR_STATE = Object.keys(INITIAL_STATE_FORM).reduce((acc, key) => {
     acc[key] = ''
     return acc;
-}, {})
+}, {} as Record<string, string | number>)
+
+
+type EditTransaction = {
+    data: TransactionInterface,
+    mode: string
+}
 
 interface ModalProps {
     closePopup: () => void;
+    editDate?: EditTransaction
 }
 
-export default function AddTransactionModal({closePopup}: ModalProps) {
+
+export default function AddTransactionModal({closePopup, editDate}: ModalProps) {
 
     const categoriesOption: OptionProps[] = useMemo(() => formatData(CATEGORIES_OPTION), [CATEGORIES_OPTION]);
     const status: OptionProps[] = useMemo(() => formatData(STATUS_OPTION), [STATUS_OPTION]);
@@ -46,8 +56,15 @@ export default function AddTransactionModal({closePopup}: ModalProps) {
 
     const dispatch = useDispatch<AppDispatch>();
 
+    useEffect(() => {
+        if (editDate.mode === PopupMode.EDIT) {
+            setForm(editDate.data)
+        }
+    }, [editDate]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
+
         const errorMsg = [];
         for (const key in form) {
             errorMsg.push(validation.validate(form, key, ErrorMessageEnum.REQUIRED))
@@ -55,12 +72,47 @@ export default function AddTransactionModal({closePopup}: ModalProps) {
 
         const isError = errorMsg.every((el) => el);
         if (!isError) return;
+
         const dataForm = {
             userId: select.id,
             ...form
         }
 
+        if (editDate?.mode === PopupMode.EDIT) {
+
+            let changedForm = {};
+
+            for (const formKey in form) {
+                const value = form[formKey]
+                if (value !== editDate.data[formKey]) {
+                    changedForm = {
+                        ...changedForm,
+                        [formKey]: value
+                    }
+                }
+            }
+
+
+            const updateData: EditTransaction = {
+                id: editDate.data.id,
+                data: changedForm
+            }
+
+            if (Object.values(updateData.data).length) {
+                dispatch(editTransaction(updateData)).then(() => {
+                    closePopup();
+                })
+            }
+
+            return;
+        }
+
         dispatch(TransactionThunk(dataForm)).then(() => {
+            dispatch(getTransaction({
+                start: 1,
+                end: LIMIT,
+                id: select.id
+            }));
             closePopup();
         });
     }
@@ -78,7 +130,7 @@ export default function AddTransactionModal({closePopup}: ModalProps) {
 
     return <div
         className='bg-[#283132] absolute top-1/2 left-1/2 w-[460px] h-fit p-4 -translate-x-1/2 -translate-y-1/2 text-white'>
-        <h3 className='text-2xl '>Add New Transaction</h3>
+        <h3 className='text-2xl'>Add New Transaction</h3>
 
         <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
             <Label label='Description' labelClass='flex flex-col'>
@@ -143,7 +195,8 @@ export default function AddTransactionModal({closePopup}: ModalProps) {
 
             <div className="flex gap-2 justify-end mt-6">
                 <Button type="button" className="border px-2 py-1 rounded" onClick={closePopup}>Cancel</Button>
-                <Button type="submit" className="bg-[#2D7A78] px-2 py-1 rounded">Save Transaction</Button>
+                <Button type="submit"
+                        className="bg-[#2D7A78] px-2 py-1 rounded">{editDate?.mode === PopupMode.EDIT ? 'Edit Transaction' : 'Save Transaction'}</Button>
             </div>
         </form>
 

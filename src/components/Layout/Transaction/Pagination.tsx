@@ -19,10 +19,10 @@ const Pagination = memo(() => {
 
     useEffect(() => {
         const totalPages = Math.ceil(select.totalCount / LIMIT);
-        const pagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
+        const pagesArray = Array.from({length: totalPages}, (_, i) => i + 1);
         setPage(pagesArray);
         setPageCount(totalPages);
-    }, [select.totalCount]);
+    }, [select.totalCount, select]);
 
 
     useEffect(() => {
@@ -36,9 +36,9 @@ const Pagination = memo(() => {
 
         if (selectedPage > 1) {
             const shift = (selectedPage - 1) * SLIDE_ITEM_WIDTH;
-            setStyle({ transform: `translateX(-${shift}px)` });
+            setStyle({transform: `translateX(-${shift}px)`});
         } else {
-            setStyle({ transform: `translateX(0px)` });
+            setStyle({transform: `translateX(0px)`});
         }
     }, [selectedPage, selectUser, dispatch, pageCount]);
 
@@ -53,6 +53,7 @@ const Pagination = memo(() => {
     const selectPage = (pageNumber: number) => {
         setSelectedPage(pageNumber);
     };
+
 
     return (
         <div className="flex items-center gap-2">

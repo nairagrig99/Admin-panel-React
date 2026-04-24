@@ -1,4 +1,166 @@
 {
-  "users": [],
-  "transactions": []
+  "users": [
+    {
+      "first_name": "Naira",
+      "last_name": "Grigoryan",
+      "gender": "Female",
+      "mobileOrEmail": "nairagrig99@gmail.com",
+      "password": "111111111111",
+      "birthOfDay": "1934-06-06T21:00:00.000Z",
+      "isLogged": true,
+      "id": 1
+    },
+    {
+      "first_name": "Hovo",
+      "last_name": "Minasyan",
+      "gender": "Male",
+      "mobileOrEmail": "hovo99@gmail.com",
+      "password": "22222222222",
+      "birthOfDay": "1937-08-05T21:00:00.000Z",
+      "isLogged": false,
+      "id": 2
+    },
+    {
+      "first_name": "Nane",
+      "last_name": "Grigoryan",
+      "gender": "Male",
+      "mobileOrEmail": "nane99@gmail.com",
+      "password": "11111111",
+      "birthOfDay": "1934-07-07T21:00:00.000Z",
+      "isLogged": false,
+      "id": 3
+    }
+  ],
+  "transactions": [
+    {
+      "userId": 2,
+      "description": "dddddf",
+      "amount": "4",
+      "amountStatus": "income",
+      "category": "Entertainment",
+      "date": "2026-04-08",
+      "status": "Pending",
+      "id": 15
+    },
+    {
+      "userId": 3,
+      "description": "new transaction",
+      "amount": "4",
+      "amountStatus": "Expense",
+      "category": "Entertainment",
+      "date": "2026-04-01",
+      "status": "Pending",
+      "id": 16
+    },
+    {
+      "userId": 1,
+      "description": "update1eqwsqqqqq",
+      "amount": "145",
+      "amountStatus": "Expense",
+      "category": "Entertainment",
+      "date": "2026-04-28",
+      "status": "completed",
+      "id": 20
+    },
+    {
+      "userId": 1,
+      "description": "update second tfhqw",
+      "amount": "1",
+      "amountStatus": "Expense",
+      "category": "Entertainment",
+      "date": "2026-04-28",
+      "status": "Pending",
+      "id": 21
+    },
+    {
+      "userId": 1,
+      "description": "new transaction",
+      "amount": "234897",
+      "amountStatus": "income",
+      "category": "Health",
+      "date": "2026-03-30",
+      "status": "Pending",
+      "id": 23
+    },
+    {
+      "userId": 1,
+      "description": "new transaction 1",
+      "id": 24,
+      "amount": "4",
+      "amountStatus": "income",
+      "category": "Housing",
+      "date": "2026-04-21",
+      "status": "completed"
+    },
+    {
+      "userId": 1,
+      "description": "123",
+      "id": 25,
+      "amount": "3",
+      "amountStatus": "Expense",
+      "category": "Shopping",
+      "date": "2026-04-21",
+      "status": "Pending"
+    },
+    {
+      "userId": 1,
+      "description": "3",
+      "id": 26,
+      "amount": "3",
+      "amountStatus": "Expense",
+      "category": "Entertainment",
+      "date": "2026-04-07",
+      "status": "Pending"
+    },
+    {
+      "userId": 1,
+      "description": "3354qw",
+      "id": 27,
+      "amount": "4",
+      "amountStatus": "Expense",
+      "category": "Shopping",
+      "date": "2026-04-08",
+      "status": "Pending"
+    },
+    {
+      "userId": 1,
+      "description": "23",
+      "id": 28,
+      "amount": "4",
+      "amountStatus": "Expense",
+      "category": "Shopping",
+      "date": "2026-04-15",
+      "status": "Pending"
+    },
+    {
+      "userId": 1,
+      "description": "45",
+      "id": 29,
+      "amount": "5",
+      "amountStatus": "Expense",
+      "category": "Housing",
+      "date": "2026-04-13",
+      "status": "Pending"
+    },
+    {
+      "userId": 1,
+      "description": "45",
+      "id": 30,
+      "amount": "5",
+      "amountStatus": "Expense",
+      "category": "Food & Dining",
+      "date": "2026-03-31",
+      "status": "Pending"
+    },
+    {
+      "userId": 1,
+      "description": "change five",
+      "id": 31,
+      "amount": "5",
+      "amountStatus": "income",
+      "category": "Housing",
+      "date": "2026-04-15",
+      "status": "completed"
+    }
+  ]
 }
