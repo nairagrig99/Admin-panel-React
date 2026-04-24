@@ -19,7 +19,7 @@ export class Loader extends Component<any> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    loader:  state.user.isLoading
+    loader:  state.user.isLoading || state.transaction.loading
 });
 
 

@@ -1,9 +1,10 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {getTransaction, TransactionThunk} from "./ApiThunkTransaction.ts";
+import {createSlice, current} from "@reduxjs/toolkit";
+import {editTransaction, getTransaction, removeTransaction, TransactionThunk} from "./ApiThunkTransaction.ts";
 import type {TransactionInterface} from "../../Model/transaction-interface.ts";
 
 const TRANSACTION_STATE: TransactionInterface[] = [{
     userId: '',
+    id: 0,
     description: '',
     amount: 0,
     amountStatus: '',
@@ -27,16 +28,15 @@ const transactionSlice = createSlice({
             state.loading = true;
             state.error = null
         })
-            .addCase(TransactionThunk.fulfilled, (state, action) => {
+            .addCase(TransactionThunk.fulfilled, (state) => {
                 state.loading = false;
-                state.transactions.push(action.payload)
             })
             .addCase(TransactionThunk.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload
             })
             .addCase(getTransaction.pending, (state, action) => {
-                state.loading = true;
+                state.loading = false;
                 state.error = action.payload
             })
             .addCase(getTransaction.fulfilled, (state, action) => {
@@ -45,6 +45,39 @@ const transactionSlice = createSlice({
                 state.totalCount = action.payload.totalCount
             })
             .addCase(getTransaction.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload
+            })
+            .addCase(removeTransaction.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(removeTransaction.fulfilled, (state, action) => {
+                state.loading = false
+                const {id} = action.payload
+                const findIndex = state.transactions.findIndex((t) => t.id === id);
+                if (findIndex != -1) {
+                    state.transactions.splice(findIndex, 1)
+                    state.totalCount = state.totalCount--
+                }
+            })
+            .addCase(removeTransaction.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload
+            })
+            .addCase(editTransaction.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(editTransaction.fulfilled, (state, action) => {
+                state.loading = false;
+                const {id} = action.payload
+                const findIndex = state.transactions.findIndex((t) => t.id === id);
+
+                if (findIndex != -1) {
+                    state.transactions[findIndex] = action.payload
+                }
+            })
+            .addCase(editTransaction.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload
             })
