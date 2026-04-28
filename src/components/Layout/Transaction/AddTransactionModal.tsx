@@ -107,7 +107,7 @@ export default function AddTransactionModal({closePopup, editDate}: ModalProps) 
 
             return;
         }
-        console.log('FIRST')
+
         dispatch(TransactionThunk(dataForm)).then(() => {
             dispatch(sortTransaction({
                 start: 1,

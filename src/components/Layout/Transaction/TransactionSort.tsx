@@ -21,7 +21,7 @@ export default function TransactionSort() {
                 end: LIMIT,
                 sortBy: selected
             }
-            console.log("FORTH", sort)
+
             dispatch(sortTransaction(sort))
         }
     }, [selected]);

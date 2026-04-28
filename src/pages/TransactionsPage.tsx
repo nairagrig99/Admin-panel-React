@@ -12,7 +12,7 @@ export default function TransactionsPage() {
 
     useEffect(() => {
         if (select.id) {
-            console.log('THIRTH')
+
             dispatch(sortTransaction({start: 1, end: LIMIT, id:select.id,sortBy:AmountStatus.ALL}))
         }
     }, [select]);

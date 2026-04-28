@@ -28,7 +28,7 @@ const Pagination = memo(() => {
 
     useEffect(() => {
         if (selectedPage <= pageCount && selectUser) {
-            console.log('SECOND')
+
             dispatch(sortTransaction({
                 start: selectedPage,
                 end: LIMIT,
