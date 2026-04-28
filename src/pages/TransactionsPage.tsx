@@ -2,8 +2,9 @@ import Transaction from "../components/Layout/Transaction/Transaction.tsx";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../Store/store.ts";
 import {useEffect} from "react";
-import {getTransaction} from "../Store/Transaction/ApiThunkTransaction.ts";
+import {sortTransaction} from "../Store/Transaction/ApiThunkTransaction.ts";
 import {LIMIT} from "../constants/constant.ts";
+import {AmountStatus} from "../Enums/amount-status.ts";
 
 export default function TransactionsPage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -11,9 +12,9 @@ export default function TransactionsPage() {
 
     useEffect(() => {
         if (select.id) {
-            dispatch(getTransaction({start: 1, end: LIMIT, id:select.id}))
+            console.log('THIRTH')
+            dispatch(sortTransaction({start: 1, end: LIMIT, id:select.id,sortBy:AmountStatus.ALL}))
         }
-
     }, [select]);
 
     return <Transaction/>

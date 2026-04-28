@@ -1,6 +1,13 @@
-import {createSlice, current} from "@reduxjs/toolkit";
-import {editTransaction, getTransaction, removeTransaction, TransactionThunk} from "./ApiThunkTransaction.ts";
+import {createSlice} from "@reduxjs/toolkit";
+import {
+    editTransaction,
+
+    removeTransaction,
+    sortTransaction,
+    TransactionThunk
+} from "./ApiThunkTransaction.ts";
 import type {TransactionInterface} from "../../Model/transaction-interface.ts";
+import {AmountStatus} from "../../Enums/amount-status.ts";
 
 const TRANSACTION_STATE: TransactionInterface[] = [{
     userId: '',
@@ -14,6 +21,7 @@ const TRANSACTION_STATE: TransactionInterface[] = [{
 }]
 const transactionState = {
     transactions: TRANSACTION_STATE,
+    sortBy:AmountStatus.ALL,
     totalCount: 0,
     status: '',
     loading: false,
@@ -32,19 +40,6 @@ const transactionSlice = createSlice({
                 state.loading = false;
             })
             .addCase(TransactionThunk.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload
-            })
-            .addCase(getTransaction.pending, (state, action) => {
-                state.loading = false;
-                state.error = action.payload
-            })
-            .addCase(getTransaction.fulfilled, (state, action) => {
-                state.loading = false;
-                state.transactions = action.payload.data
-                state.totalCount = action.payload.totalCount
-            })
-            .addCase(getTransaction.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload
             })
@@ -81,6 +76,18 @@ const transactionSlice = createSlice({
                 state.loading = false;
                 state.error = action.payload
             })
+            .addCase(sortTransaction.pending, (state, action) => {
+                state.loading = false;
+                state.error = action.payload
+            }).addCase(sortTransaction.fulfilled, (state, action) => {
+            state.loading = false;
+            state.transactions = action.payload.data
+            state.totalCount = action.payload.totalCount
+            state.sortBy=action.payload.sortBy
+        }).addCase(sortTransaction.rejected, (state, action) => {
+            state.loading = false;
+            state.error = action.payload
+        })
     }
 })
 
