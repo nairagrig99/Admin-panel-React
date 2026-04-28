@@ -11,20 +11,21 @@ import {useCallback, useEffect, useMemo, useState} from "react";
 import type {TransactionInterface} from "../../../Model/transaction-interface.ts";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../../Store/store.ts";
-import {editTransaction, getTransaction, TransactionThunk} from "../../../Store/Transaction/ApiThunkTransaction.ts";
+import {editTransaction, sortTransaction, TransactionThunk} from "../../../Store/Transaction/ApiThunkTransaction.ts";
 import {useValidation} from "../../../Hooks/useValidation.ts";
 import {ErrorMessageEnum} from "../../../Enums/error-message.enum.ts";
 import {PopupMode} from "../../../Enums/popup-mode.ts";
+import {AmountStatus} from "../../../Enums/amount-status.ts";
 
 
 const INITIAL_STATE_FORM: TransactionInterface = {
     description: '',
     id: 0,
     amount: '',
-    amountStatus: 'Expense',
+    amountStatus: 'expense',
     category: '',
     date: '',
-    status: 'Pending'
+    status: 'pending'
 }
 
 const ERROR_STATE = Object.keys(INITIAL_STATE_FORM).reduce((acc, key) => {
@@ -108,10 +109,11 @@ export default function AddTransactionModal({closePopup, editDate}: ModalProps) 
         }
 
         dispatch(TransactionThunk(dataForm)).then(() => {
-            dispatch(getTransaction({
+            dispatch(sortTransaction({
                 start: 1,
                 end: LIMIT,
-                id: select.id
+                id: select.id,
+                sortBy: AmountStatus.ALL
             }));
             closePopup();
         });

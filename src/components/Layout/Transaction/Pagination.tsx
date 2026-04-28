@@ -3,8 +3,9 @@ import type {AppDispatch, RootState} from "../../../Store/store.ts";
 import PreviousIcon from "../../UI/PreviousIcon.tsx";
 import NextIcon from "../../UI/NetxIcon.tsx";
 import {memo, useEffect, useState} from "react";
-import {getTransaction} from "../../../Store/Transaction/ApiThunkTransaction.ts";
+import {sortTransaction} from "../../../Store/Transaction/ApiThunkTransaction.ts";
 import {LIMIT, SLIDE_ITEM_COUNT, SLIDE_ITEM_WIDTH} from "../../../constants/constant.ts";
+import {AmountStatus} from "../../../Enums/amount-status.ts";
 
 const Pagination = memo(() => {
     const select = useSelector((state: RootState) => state.transaction);
@@ -27,10 +28,12 @@ const Pagination = memo(() => {
 
     useEffect(() => {
         if (selectedPage <= pageCount && selectUser) {
-            dispatch(getTransaction({
+
+            dispatch(sortTransaction({
                 start: selectedPage,
                 end: LIMIT,
-                id: selectUser.id
+                id: selectUser.id,
+                sortBy: select.sortBy
             }));
         }
 
@@ -40,7 +43,7 @@ const Pagination = memo(() => {
         } else {
             setStyle({transform: `translateX(0px)`});
         }
-    }, [selectedPage, selectUser, dispatch, pageCount]);
+    }, [selectedPage, pageCount]);
 
     const previousHandle = () => {
         if (selectedPage > 1) setSelectedPage(prev => prev - 1);

@@ -46,7 +46,7 @@
       "userId": 3,
       "description": "new transaction",
       "amount": "4",
-      "amountStatus": "Expense",
+      "amountStatus": "expense",
       "category": "Entertainment",
       "date": "2026-04-01",
       "status": "Pending",
@@ -56,21 +56,11 @@
       "userId": 1,
       "description": "update1eqwsqqqqq",
       "amount": "145",
-      "amountStatus": "Expense",
+      "amountStatus": "expense",
       "category": "Entertainment",
       "date": "2026-04-28",
       "status": "completed",
       "id": 20
-    },
-    {
-      "userId": 1,
-      "description": "update second tfhqw",
-      "amount": "1",
-      "amountStatus": "Expense",
-      "category": "Entertainment",
-      "date": "2026-04-28",
-      "status": "Pending",
-      "id": 21
     },
     {
       "userId": 1,
@@ -84,20 +74,10 @@
     },
     {
       "userId": 1,
-      "description": "new transaction 1",
-      "id": 24,
-      "amount": "4",
-      "amountStatus": "income",
-      "category": "Housing",
-      "date": "2026-04-21",
-      "status": "completed"
-    },
-    {
-      "userId": 1,
       "description": "123",
       "id": 25,
       "amount": "3",
-      "amountStatus": "Expense",
+      "amountStatus": "expense",
       "category": "Shopping",
       "date": "2026-04-21",
       "status": "Pending"
@@ -107,7 +87,7 @@
       "description": "3",
       "id": 26,
       "amount": "3",
-      "amountStatus": "Expense",
+      "amountStatus": "expense",
       "category": "Entertainment",
       "date": "2026-04-07",
       "status": "Pending"
@@ -117,29 +97,9 @@
       "description": "3354qw",
       "id": 27,
       "amount": "4",
-      "amountStatus": "Expense",
+      "amountStatus": "expense",
       "category": "Shopping",
       "date": "2026-04-08",
-      "status": "Pending"
-    },
-    {
-      "userId": 1,
-      "description": "23",
-      "id": 28,
-      "amount": "4",
-      "amountStatus": "Expense",
-      "category": "Shopping",
-      "date": "2026-04-15",
-      "status": "Pending"
-    },
-    {
-      "userId": 1,
-      "description": "45",
-      "id": 29,
-      "amount": "5",
-      "amountStatus": "Expense",
-      "category": "Housing",
-      "date": "2026-04-13",
       "status": "Pending"
     },
     {
@@ -147,7 +107,7 @@
       "description": "45",
       "id": 30,
       "amount": "5",
-      "amountStatus": "Expense",
+      "amountStatus": "income",
       "category": "Food & Dining",
       "date": "2026-03-31",
       "status": "Pending"
