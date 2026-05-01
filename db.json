@@ -121,6 +121,16 @@
       "category": "Housing",
       "date": "2026-04-15",
       "status": "completed"
+    },
+    {
+      "userId": 1,
+      "description": "transaction 1",
+      "id": 32,
+      "amount": "876",
+      "amountStatus": "expense",
+      "category": "Shopping",
+      "date": "2026-05-18",
+      "status": "completed"
     }
   ]
 }

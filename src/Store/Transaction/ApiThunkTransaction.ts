@@ -1,10 +1,11 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import type {TransactionInterface} from "../../Model/transaction-interface.ts";
-import {ERROR_MSG, LIMIT, URL_TRANSACTIONS} from "../../constants/constant.ts";
+import {ERROR_MSG, URL_TRANSACTIONS} from "../../constants/constant.ts";
 import {ErrorHelper} from "../../utils/errorHelper.ts";
 import type {EditTransaction} from "../../Model/edit-transaction-type.ts";
 
 import {AmountStatus} from "../../Enums/amount-status.ts";
+import type {TransactionParams} from "../../Model/pagination-type.ts";
 
 export const TransactionThunk = createAsyncThunk(
     'add/transaction',
@@ -31,33 +32,6 @@ export const TransactionThunk = createAsyncThunk(
         }
     }
 )
-export type TransactionParams = {
-    start: number;
-    end: number,
-    id: number
-}
-// export const getTransaction = createAsyncThunk(
-//     'get/Transactions',
-//     async ({start, end, id}: TransactionParams) => {
-//         try {
-//             const response = await fetch(`${URL_TRANSACTIONS}?userId=${id}&_page=${start}&_limit=${end}`, {
-//                 method: 'GET'
-//             })
-//
-//             if (!response.ok) {
-//                 ErrorHelper(ERROR_MSG)
-//             }
-//
-//             const data = await response.json();
-//
-//             const totalCount = response.headers.get("x-total-count");
-//             return {data: data, totalCount: Number(totalCount)};
-//         } catch (err) {
-//             console.error(err)
-//         }
-//
-//     }
-// )
 
 export const removeTransaction = createAsyncThunk(
     'remove/Transaction',
@@ -76,7 +50,6 @@ export const removeTransaction = createAsyncThunk(
         } catch (err) {
             console.error(err)
         }
-
     }
 )
 
@@ -100,17 +73,18 @@ export const editTransaction = createAsyncThunk(
         } catch (err) {
             console.error(err)
         }
-
     }
 )
 
 export type SortByType = {
-    sortBy: AmountStatus
+    sortBy: AmountStatus,
+    searchQuery?: string
 } & TransactionParams
 
 export const sortTransaction = createAsyncThunk(
     'sort/Transaction',
     async (sort: SortByType) => {
+
         const params = new URLSearchParams({
             userId: sort.id,
             _page: sort.start,
@@ -118,9 +92,12 @@ export const sortTransaction = createAsyncThunk(
         })
 
         if (sort.sortBy !== AmountStatus.ALL) {
-            params.append('amountStatus', sort.sortBy)
+            params.append('amountStatus', sort.sortBy);
         }
 
+        if (sort.searchQuery) {
+            params.append('description_like', sort.searchQuery.trim());
+        }
 
         const response = await fetch(`${URL_TRANSACTIONS}?${params.toString()}`);
         if (!response.ok) ErrorHelper(ERROR_MSG)
