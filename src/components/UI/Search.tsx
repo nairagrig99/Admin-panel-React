@@ -1,25 +1,25 @@
-import {memo, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import {sortTransaction} from "../../Store/Transaction/ApiThunkTransaction.ts";
-import {useDispatch, useSelector} from "react-redux";
-import type {AppDispatch, RootState} from "../../Store/store.ts";
-import {LIMIT} from "../../constants/constant.ts";
+import {useDispatch} from "react-redux";
+import type {AppDispatch} from "../../Store/store.ts";
+import useTransactionRequest from "../../Hooks/useTransactionRequest.ts";
+import {setSearchBy} from "../../Store/Transaction/transactionSlice.ts";
+
 
 const Search = memo(() => {
     const [search, setSearch] = useState("");
     const dispatch = useDispatch<AppDispatch>();
-    const select = useSelector((state: RootState) => state.user.loggedUser);
-    const transaction = useSelector((state: RootState) => state.transaction.sortBy);
+    const getTransaction = useTransactionRequest()
+
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSearch(e.target.value);
-        dispatch(sortTransaction({
-            start: 1,
-            end: LIMIT,
-            id: select.id,
-            searchQuery: e.target.value,
-            sortBy: transaction
-        }))
+        const value = e.target.value;
+        setSearch(value);
+        dispatch(setSearchBy(value));
     }
 
+    useEffect(() => {
+        dispatch(sortTransaction(getTransaction()));
+    }, [search]);
 
     return <input type="search"
                   value={search}

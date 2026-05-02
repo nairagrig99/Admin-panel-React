@@ -15,7 +15,7 @@ import {editTransaction, sortTransaction, TransactionThunk} from "../../../Store
 import {useValidation} from "../../../Hooks/useValidation.ts";
 import {ErrorMessageEnum} from "../../../Enums/error-message.enum.ts";
 import {PopupMode} from "../../../Enums/popup-mode.ts";
-import {AmountStatus} from "../../../Enums/amount-status.ts";
+import useTransactionRequest from "../../../Hooks/useTransactionRequest.ts";
 
 
 const INITIAL_STATE_FORM: TransactionInterface = {
@@ -44,7 +44,6 @@ interface ModalProps {
     editDate?: EditTransaction
 }
 
-
 export default function AddTransactionModal({closePopup, editDate}: ModalProps) {
 
     const categoriesOption: OptionProps[] = useMemo(() => formatData(CATEGORIES_OPTION), [CATEGORIES_OPTION]);
@@ -55,6 +54,7 @@ export default function AddTransactionModal({closePopup, editDate}: ModalProps) 
     const [form, setForm] = useState<TransactionInterface>(INITIAL_STATE_FORM);
     const validation = useValidation(ERROR_STATE);
 
+    const getTransaction = useTransactionRequest()
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -93,7 +93,6 @@ export default function AddTransactionModal({closePopup, editDate}: ModalProps) 
                 }
             }
 
-
             const updateData: EditTransaction = {
                 id: editDate.data.id,
                 data: changedForm
@@ -109,12 +108,7 @@ export default function AddTransactionModal({closePopup, editDate}: ModalProps) 
         }
 
         dispatch(TransactionThunk(dataForm)).then(() => {
-            dispatch(sortTransaction({
-                start: 1,
-                end: LIMIT,
-                id: select.id,
-                sortBy: AmountStatus.ALL
-            }));
+            dispatch(sortTransaction(getTransaction()));
             closePopup();
         });
     }

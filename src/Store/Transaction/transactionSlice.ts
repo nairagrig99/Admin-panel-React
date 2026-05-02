@@ -19,18 +19,33 @@ const TRANSACTION_STATE: TransactionInterface[] = [{
     date: new Date().toISOString(),
     status: ''
 }]
+
 const transactionState = {
     transactions: TRANSACTION_STATE,
-    sortBy:AmountStatus.ALL,
+    sortBy: AmountStatus.ALL,
+    selectedPage: 1,
+    search: '',
     totalCount: 0,
     status: '',
     loading: false,
     error: null
 }
+
 const transactionSlice = createSlice({
     name: 'Transaction',
     initialState: transactionState,
-    reducers: {},
+    reducers: {
+        setSortBy: (state, action) => {
+            state.sortBy = action.payload
+            console.log("state.sortBy", state.sortBy)
+        },
+        setSearchBy: (state, action) => {
+            state.search = action.payload
+        },
+        setSelectedPages: (state, action) => {
+            state.selectedPage = action.payload
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(TransactionThunk.pending, (state) => {
             state.loading = true;
@@ -83,12 +98,13 @@ const transactionSlice = createSlice({
             state.loading = false;
             state.transactions = action.payload.data
             state.totalCount = action.payload.totalCount
-            state.sortBy=action.payload.sortBy
         }).addCase(sortTransaction.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload
         })
     }
 })
+
+export const {setSortBy, setSearchBy, setSelectedPages} = transactionSlice.actions
 
 export default transactionSlice.reducer;
