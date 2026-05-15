@@ -7,7 +7,7 @@
       "mobileOrEmail": "nairagrig99@gmail.com",
       "password": "111111111111",
       "birthOfDay": "1934-06-06T21:00:00.000Z",
-      "isLogged": true,
+      "isLogged": false,
       "id": 1
     },
     {
@@ -131,6 +131,335 @@
       "category": "Shopping",
       "date": "2026-05-18",
       "status": "completed"
+    },
+    {
+      "userId": 1,
+      "description": "my last transaction",
+      "id": 33,
+      "amount": "567",
+      "amountStatus": "income",
+      "category": "Entertainment",
+      "date": "2026-05-20",
+      "status": "pending"
+    }
+  ],
+  "goals": [
+    {
+      "userId": 1,
+      "goalName": "New Laptop 789990000",
+      "targetAmount": "1000",
+      "initialSavings": "700",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "7000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-27",
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "7000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-27",
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "7000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-27",
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "7000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-27",
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 11
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "7000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-27",
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 13
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 14
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "7000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-27",
+      "id": 15
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 16
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "7000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-27",
+      "id": 17
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "1000",
+      "initialSavings": "245",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-25",
+      "id": 18
+    },
+    {
+      "userId": 1,
+      "goalName": "toyota camery ",
+      "targetAmount": "9000",
+      "initialSavings": "1000",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_lbplovlbplovlbpl (1).png",
+      "date": "2026-05-13",
+      "id": 19
+    },
+    {
+      "userId": 1,
+      "goalName": "Buy Car next year",
+      "targetAmount": "5000",
+      "initialSavings": "4000",
+      "iconImg": "C:\\fakepath\\3 (481) (1).docx",
+      "date": "2026-06-03",
+      "id": 20
+    },
+    {
+      "userId": 1,
+      "goalName": "buy home",
+      "targetAmount": "1500000",
+      "initialSavings": "100000",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode.png",
+      "date": "2026-06-03",
+      "id": 21
+    },
+    {
+      "userId": 1,
+      "goalName": "bmw car",
+      "targetAmount": "1000",
+      "initialSavings": "1000",
+      "iconImg": "C:\\fakepath\\Screenshot_16.png",
+      "date": "2026-06-03",
+      "id": 22
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop",
+      "targetAmount": "5000",
+      "initialSavings": "4000",
+      "iconImg": "C:\\fakepath\\3 (481) (1).docx",
+      "date": "2026-05-29",
+      "id": 23
+    },
+    {
+      "userId": 1,
+      "goalName": "New Laptop 3456",
+      "targetAmount": "3000",
+      "initialSavings": "1000",
+      "iconImg": "C:\\fakepath\\3 (481) (1).docx",
+      "date": "2026-05-27",
+      "id": 24
+    },
+    {
+      "userId": 1,
+      "goalStatus": "Completed",
+      "goalName": "new goal wirh persantage",
+      "targetAmount": "2000",
+      "initialSavings": "1000",
+      "iconImg": "C:\\fakepath\\3 (481) (1).docx",
+      "date": "2026-05-27",
+      "id": 25
+    },
+    {
+      "userId": 1,
+      "goalStatus": "Active",
+      "goalName": "safds",
+      "targetAmount": "3589",
+      "initialSavings": "2341",
+      "iconImg": "C:\\fakepath\\Gemini_Generated_Image_2oder12oder12ode (1).png",
+      "date": "2026-05-20",
+      "id": 26
+    },
+    {
+      "userId": 1,
+      "goalStatus": "All Goals",
+      "goalName": "new Goal",
+      "targetAmount": "2000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\3 (481) (1).docx",
+      "date": "2026-05-27",
+      "id": 27
+    },
+    {
+      "userId": 1,
+      "goalStatus": "All Goals",
+      "goalName": "Goal name ",
+      "targetAmount": "1000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\Screenshot_16.png",
+      "date": "2026-05-26",
+      "id": 28
+    },
+    {
+      "userId": 1,
+      "goalStatus": "All Goals",
+      "goalName": " new goals",
+      "targetAmount": "567894",
+      "initialSavings": "23333",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-20",
+      "id": 29
+    },
+    {
+      "userId": 1,
+      "goalStatus": "All Goals",
+      "goalName": "Completed",
+      "targetAmount": "1000",
+      "initialSavings": "1000",
+      "iconImg": "C:\\fakepath\\3 (481) (1).docx",
+      "date": "2026-05-26",
+      "id": 30
+    },
+    {
+      "userId": 1,
+      "goalStatus": "All Goals",
+      "goalName": "buy new car BMW or Mercedes",
+      "targetAmount": "3000",
+      "initialSavings": "3000",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-31",
+      "id": 31
+    },
+    {
+      "userId": 1,
+      "goalStatus": "All Goals",
+      "goalName": "new goal completed",
+      "targetAmount": "2000",
+      "initialSavings": "2000",
+      "iconImg": "C:\\fakepath\\Screenshot_16.png",
+      "date": "2026-05-24",
+      "id": 32
+    },
+    {
+      "userId": 1,
+      "goalStatus": "All Goals",
+      "goalName": "completed goals",
+      "targetAmount": "3000",
+      "initialSavings": "3000",
+      "iconImg": "C:\\fakepath\\Screenshot_16.png",
+      "date": "2026-05-18",
+      "id": 33
+    },
+    {
+      "userId": 1,
+      "goalStatus": "All Goals",
+      "goalName": "new",
+      "targetAmount": "1000",
+      "initialSavings": "1000",
+      "iconImg": "C:\\fakepath\\Screenshot_16.png",
+      "date": "2026-05-14",
+      "id": 34
+    },
+    {
+      "userId": 1,
+      "goalStatus": "Completed",
+      "goalName": "new goal",
+      "targetAmount": "100",
+      "initialSavings": "100",
+      "iconImg": "C:\\fakepath\\3 (481).docx",
+      "date": "2026-05-27",
+      "id": 35
     }
   ]
 }

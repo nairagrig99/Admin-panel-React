@@ -5,16 +5,16 @@ import {useEffect} from "react";
 import {sortTransaction} from "../Store/Transaction/ApiThunkTransaction.ts";
 import {LIMIT} from "../constants/constant.ts";
 import {AmountStatus} from "../Enums/amount-status.ts";
+import useTransactionRequest from "../Hooks/useTransactionRequest.ts";
 
 export default function TransactionsPage() {
+
     const dispatch = useDispatch<AppDispatch>();
-    const select = useSelector((state: RootState) => state.user.loggedUser);
+    const getTransaction = useTransactionRequest();
 
     useEffect(() => {
-        if (select.id) {
-            dispatch(sortTransaction({start: 1, end: LIMIT, id: select.id, sortBy: AmountStatus.ALL}))
-        }
-    }, [select]);
+        dispatch(sortTransaction(getTransaction()))
+    }, []);
 
     return <Transaction/>
 }

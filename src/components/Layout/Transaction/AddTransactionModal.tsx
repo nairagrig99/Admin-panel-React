@@ -1,7 +1,7 @@
 import Input from "../../UI/Input.tsx";
 import Label from "../../UI/Label.tsx";
 import Select from "../../UI/Select.tsx";
-import {CATEGORIES_OPTION, LIMIT, STATUS_EXPENSE, STATUS_OPTION} from "../../../constants/constant.ts";
+import {CATEGORIES_OPTION, STATUS_EXPENSE, STATUS_OPTION} from "../../../constants/constant.ts";
 import type {OptionProps} from "../../../Model/select-props.ts";
 import SelectRadioBtn from "../../UI/SelectRadioBtn.tsx";
 import {formatData} from "../../../utils/formatData.ts";
@@ -15,35 +15,19 @@ import {editTransaction, sortTransaction, TransactionThunk} from "../../../Store
 import {useValidation} from "../../../Hooks/useValidation.ts";
 import {ErrorMessageEnum} from "../../../Enums/error-message.enum.ts";
 import {PopupMode} from "../../../Enums/popup-mode.ts";
-import {AmountStatus} from "../../../Enums/amount-status.ts";
+import useTransactionRequest from "../../../Hooks/useTransactionRequest.ts";
+import type {ModalProps} from "../../../Model/ModalProps.ts";
+import type {EditTransaction} from "../../../Model/edit-transaction-type.ts";
 
 
 const INITIAL_STATE_FORM: TransactionInterface = {
     description: '',
-    id: 0,
     amount: '',
     amountStatus: 'expense',
     category: '',
     date: '',
     status: 'pending'
 }
-
-const ERROR_STATE = Object.keys(INITIAL_STATE_FORM).reduce((acc, key) => {
-    acc[key] = ''
-    return acc;
-}, {} as Record<string, string | number>)
-
-
-type EditTransaction = {
-    data: TransactionInterface,
-    mode: string
-}
-
-interface ModalProps {
-    closePopup: () => void;
-    editDate?: EditTransaction
-}
-
 
 export default function AddTransactionModal({closePopup, editDate}: ModalProps) {
 
@@ -53,8 +37,9 @@ export default function AddTransactionModal({closePopup, editDate}: ModalProps) 
     const select = useSelector((state: RootState) => state.user.loggedUser)
 
     const [form, setForm] = useState<TransactionInterface>(INITIAL_STATE_FORM);
-    const validation = useValidation(ERROR_STATE);
+    const validation = useValidation(INITIAL_STATE_FORM);
 
+    const getTransaction = useTransactionRequest()
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -93,7 +78,6 @@ export default function AddTransactionModal({closePopup, editDate}: ModalProps) 
                 }
             }
 
-
             const updateData: EditTransaction = {
                 id: editDate.data.id,
                 data: changedForm
@@ -109,12 +93,7 @@ export default function AddTransactionModal({closePopup, editDate}: ModalProps) 
         }
 
         dispatch(TransactionThunk(dataForm)).then(() => {
-            dispatch(sortTransaction({
-                start: 1,
-                end: LIMIT,
-                id: select.id,
-                sortBy: AmountStatus.ALL
-            }));
+            dispatch(sortTransaction(getTransaction()));
             closePopup();
         });
     }

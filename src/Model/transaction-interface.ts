@@ -1,6 +1,6 @@
 export interface TransactionInterface {
     userId?: string,
-    id: number,
+    id?: number,
     description: string,
     amount: number | string,
     amountStatus: string,
