@@ -10,13 +10,10 @@ import RegisterForm from "./components/Auth/RegisterForm.tsx";
 import {coreStore} from "./Store/store.ts"
 import {Provider} from "react-redux";
 import Loader from "./components/UI/Loader.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
 import {loginLoader, protectedLoader} from "./loader/authLoader.ts";
 
 const Transactions = lazy(() => import("./pages/TransactionsPage.tsx"));
-import Goals from "./pages/Goals.tsx";
-import Reports from "./pages/Reports.tsx";
-import Settings from "./pages/Settings.tsx";
+import GoalsPage from "./pages/GoalsPage.tsx";
 import {AuthWrapper} from "./components/Auth/AuthWrapper.tsx";
 
 export const router = createBrowserRouter([
@@ -26,11 +23,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Navigate to="/dashboard" replace/>
-            },
-            {
-                path: 'dashboard',
-                element: <Dashboard/>
+                element: <Navigate to="/transactions" replace/>
             },
             {
                 path: 'transactions',
@@ -38,17 +31,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'goals',
-                element: <Goals/>
-            },
-            {
-                path: 'reports',
-                element: <Reports/>
-            },
-            {
-                path: 'settings',
-                element: <Settings/>
+                element: <GoalsPage/>
             }
-
         ]
     },
     {

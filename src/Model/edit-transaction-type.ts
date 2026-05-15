@@ -1,4 +1,6 @@
+import type {TransactionInterface} from "./transaction-interface.ts";
+
 export type EditTransaction = {
-    id: string,
-    data: Record<string, string | number>
+    data: TransactionInterface,
+    mode: string
 }

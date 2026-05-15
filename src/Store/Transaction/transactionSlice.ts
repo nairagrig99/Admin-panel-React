@@ -36,11 +36,10 @@ const transactionSlice = createSlice({
     initialState: transactionState,
     reducers: {
         setSortBy: (state, action) => {
-            state.sortBy = action.payload
-            console.log("state.sortBy", state.sortBy)
+            state.sortBy = action.payload;
         },
         setSearchBy: (state, action) => {
-            state.search = action.payload
+            state.search = action.payload;
         },
         setSelectedPages: (state, action) => {
             state.selectedPage = action.payload

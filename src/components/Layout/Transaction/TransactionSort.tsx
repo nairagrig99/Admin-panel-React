@@ -7,6 +7,7 @@ import {sortTransaction} from "../../../Store/Transaction/ApiThunkTransaction.ts
 
 import useTransactionRequest from "../../../Hooks/useTransactionRequest.ts";
 import {setSortBy} from "../../../Store/Transaction/transactionSlice.ts";
+import FilterButtonGroup from "../../UI/FilterButtonGroup.tsx";
 
 export default function TransactionSort() {
     const [selected, setSelected] = useState<AmountStatus>(AmountStatus.ALL);
@@ -20,18 +21,8 @@ export default function TransactionSort() {
     };
 
     useEffect(() => {
-        console.log("selected", selected)
         dispatch(sortTransaction(getTransaction()))
     }, [selected]);
 
-    return <div className="flex bg-[#68C6C6] py-[2px] rounded-[7px]  justify-evenly w-[194px]">
-        {
-            sortButtons.map((btn) => (
-                <Button type='button'
-                        key={btn}
-                        className={` ${selected === btn ? 'bg-[#37A6A6]' : 'bg-transparent'} px-2 py-1 rounded capitalize`}
-                        onClick={() => handleSort(btn)}>{btn}</Button>
-            ))
-        }
-    </div>
+    return <FilterButtonGroup sortButtons={sortButtons} handleSort={handleSort} selected={selected}/>
 }

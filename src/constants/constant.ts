@@ -1,5 +1,6 @@
 export const URL = 'http://localhost:3000/users';
 export const URL_TRANSACTIONS = 'http://localhost:3000/transactions';
+export const URL_GOALS = 'http://localhost:3000/goals';
 export const CATEGORIES_OPTION = ['Food & Dining', 'Transportation', 'Housing', 'Entertainment', 'Shopping', 'Health', 'Education']
 export const STATUS_OPTION = ['pending', 'completed']
 export const STATUS_EXPENSE = ['expense', 'income']

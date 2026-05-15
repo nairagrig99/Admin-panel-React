@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {getUser, registerUser, updateUser} from "./ApiThunk.ts";
 import type {UserInterface} from "../../Model/user-interface.ts";
 
-const UserState: UserInterface[] = [{
+const EMPTY_USER: UserInterface = {
     id: "",
     first_name: "",
     last_name: "",
@@ -11,14 +11,22 @@ const UserState: UserInterface[] = [{
     mobileOrEmail: "",
     password: "",
     isLogged: false
-}]
+};
 
-const INITIAL_STATE = {
-    user: UserState,
-    loggedUser: undefined,
+export interface UserSliceState {
+    user: UserInterface[];
+    loggedUser: UserInterface | null;
+    isLoading: boolean;
+    error: string | null;
+}
+
+const INITIAL_STATE: UserSliceState = {
+    user: [],
+    loggedUser: EMPTY_USER,
     isLoading: false,
     error: null,
-}
+};
+
 
 const userSlice = createSlice({
     name: 'userSlice',
@@ -26,7 +34,7 @@ const userSlice = createSlice({
     reducers: {
         logOut: (state) => {
             state.loggedUser = null;
-            state.user = null;
+            state.user = [];
             state.isLoading = false
         }
     },
